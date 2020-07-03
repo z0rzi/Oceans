@@ -1,0 +1,33 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "no-case-declarations": 0,
+        "no-extra-boolean-cast": 0,
+        "no-empty": 1,
+        "no-unused-vars": 1,
+        "no-constant-condition": 1,
+        "prefer-const": 1,
+        "indent": [2, 4, { "SwitchCase": 1 }],
+        "quotes": [2, "single"],
+        "semi": [2, "never"]
+    }
+}

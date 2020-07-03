@@ -1,0 +1,12 @@
+{
+    "definitions": { 
+        "punctuation": "[?!.:,]",
+        "event-word": "when|if|as soon as|after|once",
+
+        "qualifier": "a|the|his|her|their",
+        "action-word": "then|send|post|text|call|present|show|explain"
+    },
+    "matches": {
+        "{{:event-word:}} (?:(?!{{:punctuation:}}|(?:(?<!{{:qualifier:}} ){{:action-word:}})).)*": "event"
+    }
+}
