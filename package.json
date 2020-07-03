@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prompt": "tsc && export NODE_PATH='${NODE_PATH}:./dist' && node dist/prompt.js",
+    "setup": "tsc && export NODE_PATH='${NODE_PATH}:./dist' && node dist/setupElastic.js",
     "build": "tsc",
     "test": "jest"
   },

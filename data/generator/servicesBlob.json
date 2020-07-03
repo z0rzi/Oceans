@@ -1,0 +1,773 @@
+[
+    {
+        "configuration": {
+            "actions": {
+                "debug": {
+                    "arguments": {
+                        "msg": {
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "help": "Log a message with the DEBUG level",
+                    "http": {
+                        "method": "post",
+                        "path": "/ignore",
+                        "port": 8000
+                    },
+                    "output": {
+                        "type": "none"
+                    }
+                },
+                "error": {
+                    "arguments": {
+                        "msg": {
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "help": "Log a message with the ERROR level",
+                    "http": {
+                        "method": "post",
+                        "path": "/ignore",
+                        "port": 8000
+                    },
+                    "output": {
+                        "type": "none"
+                    }
+                },
+                "info": {
+                    "arguments": {
+                        "msg": {
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "help": "Log a message with the INFO level",
+                    "http": {
+                        "method": "post",
+                        "path": "/ignore",
+                        "port": 8000
+                    },
+                    "output": {
+                        "type": "none"
+                    }
+                },
+                "warn": {
+                    "arguments": {
+                        "msg": {
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "help": "Log a message with the WARN level",
+                    "http": {
+                        "method": "post",
+                        "path": "/ignore",
+                        "port": 8000
+                    },
+                    "output": {
+                        "type": "none"
+                    }
+                }
+            },
+            "info": {
+                "contact": {
+                    "email": "infra@storyscript.io",
+                    "name": "Storyscript",
+                    "url": "https://storyscript.io"
+                },
+                "description": "This is the microservice.yml which corresponds to the native implementation of the log service",
+                "license": {
+                    "name": "MIT",
+                    "url": "https://opensource.org/licenses/MIT"
+                },
+                "title": "Simple logger for Storyscript Cloud",
+                "version": "1.0.1"
+            },
+            "omg": 1
+        },
+        "readme": "# log\nThe microservice yaml for `log` -- An internal Asyncy service\n\n## Usage\n```coffee\nlog debug msg:\"This is a debug message\"\nlog info msg:\"This is an info message\"\nlog warn msg:\"This is a warn message\"\nlog error msg:\"This is an error message\"\n```\n",
+        "service": {
+            "alias": "log",
+            "description": "The microservice yaml for `log` -- An internal Asyncy service",
+            "isCertified": true,
+            "name": "log",
+            "owner": {
+                "username": "storyscript"
+            },
+            "public": true,
+            "topics": [
+                "logging",
+                "logger"
+            ]
+        },
+        "serviceUuid": "12a33ef9-e4bc-403e-ac94-dcb15a9b5d3b",
+        "state": "BETA"
+    },
+    {
+        "configuration": {
+            "actions": {
+                "fetch": {
+                    "arguments": {
+                        "body": {
+                            "in": "requestBody",
+                            "type": "any"
+                        },
+                        "headers": {
+                            "in": "requestBody",
+                            "type": "map"
+                        },
+                        "method": {
+                            "default": "get",
+                            "enum": [
+                                "get",
+                                "post",
+                                "patch",
+                                "delete",
+                                "put",
+                                "options"
+                            ],
+                            "in": "requestBody",
+                            "type": "enum"
+                        },
+                        "query": {
+                            "help": "Set an optional map of query parameters.\nQuery parameters are automatically appended to the url specified (/url?foo=bar&john=doe)\n",
+                            "in": "requestBody",
+                            "type": "map"
+                        },
+                        "url": {
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "help": "Make a HTTP request to the outside world.\nThis command is native to the platform for performance reasons.\n",
+                    "http": {
+                        "method": "post",
+                        "path": "/ignore",
+                        "port": 8000
+                    },
+                    "output": {
+                        "type": "any"
+                    }
+                },
+                "server": {
+                    "events": {
+                        "listen": {
+                            "arguments": {
+                                "method": {
+                                    "default": "get",
+                                    "enum": [
+                                        "get",
+                                        "post",
+                                        "patch",
+                                        "delete",
+                                        "put",
+                                        "options"
+                                    ],
+                                    "in": "requestBody",
+                                    "type": "enum"
+                                },
+                                "path": {
+                                    "in": "requestBody",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            },
+                            "help": "Listen and respond to http connections by\nregistering with the Storyscript Gateway resulting in a serverless function.\n",
+                            "http": {
+                                "port": 8889,
+                                "subscribe": {
+                                    "contentType": "application/json",
+                                    "method": "post",
+                                    "path": "/register"
+                                },
+                                "unsubscribe": {
+                                    "contentType": "application/json",
+                                    "method": "post",
+                                    "path": "/unregister"
+                                }
+                            },
+                            "output": {
+                                "actions": {
+                                    "addHeader": {
+                                        "arguments": {
+                                            "name": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "help": "Add an HTTP header.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "finish": {
+                                        "help": "Finish a response and send it to the client.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "flush": {
+                                        "help": "Flushes the current output buffer to the network.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "redirect": {
+                                        "arguments": {
+                                            "query": {
+                                                "help": "These query parameters are appended to the URL specified.",
+                                                "in": "responseBody",
+                                                "type": "map"
+                                            },
+                                            "url": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "help": "Redirect the incoming URL. No additional actions may be used after executing this command.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "setStatus": {
+                                        "arguments": {
+                                            "code": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "int"
+                                            }
+                                        },
+                                        "help": "Set an HTTP status code.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "set_header": {
+                                        "arguments": {
+                                            "key": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "help": "DEPRECATED. Use 'header'.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "set_status": {
+                                        "arguments": {
+                                            "code": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "int"
+                                            }
+                                        },
+                                        "help": "DEPRECATED. Use 'status'.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "write": {
+                                        "arguments": {
+                                            "content": {
+                                                "help": "The response content.",
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            "flush": {
+                                                "help": "Parameter which decides whether to flush the response.",
+                                                "in": "responseBody",
+                                                "required": false,
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    },
+                                    "writeJSON": {
+                                        "arguments": {
+                                            "content": {
+                                                "help": "The content from which the JSON response will be built.",
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "any"
+                                            }
+                                        },
+                                        "help": "Write a JSON response body.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    }
+                                },
+                                "contentType": "application/json",
+                                "properties": {
+                                    "body": {
+                                        "help": "The JSON body of the incoming HTTP request",
+                                        "type": "map"
+                                    },
+                                    "files": {
+                                        "map": {
+                                            "keys": {
+                                                "help": "File name in the request",
+                                                "type": "string"
+                                            },
+                                            "values": {
+                                                "help": "Individual file object",
+                                                "properties": {
+                                                    "body": {
+                                                        "help": "Raw source of this file",
+                                                        "type": "string"
+                                                    },
+                                                    "contentType": {
+                                                        "help": "Content-Type of the file object",
+                                                        "type": "string"
+                                                    },
+                                                    "filename": {
+                                                        "help": "Original local file name",
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "help": "File name in the request",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "map"
+                                    },
+                                    "formFields": {
+                                        "help": "The form fields of the incoming HTTP request",
+                                        "map": {
+                                            "keys": {
+                                                "type": "string"
+                                            },
+                                            "values": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "map"
+                                    },
+                                    "headers": {
+                                        "help": "The HTTP headers of the incoming HTTP request",
+                                        "type": "map"
+                                    },
+                                    "path": {
+                                        "help": "The path portion of the URI of the incoming HTTP request",
+                                        "type": "string"
+                                    },
+                                    "queryParams": {
+                                        "help": "The parsed query parameters of the HTTP request",
+                                        "map": {
+                                            "keys": {
+                                                "type": "string"
+                                            },
+                                            "values": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "map"
+                                    },
+                                    "query_params": {
+                                        "help": "DEPRECATED. Use 'queryParams'.\n",
+                                        "map": {
+                                            "keys": {
+                                                "type": "string"
+                                            },
+                                            "values": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "map"
+                                    },
+                                    "uri": {
+                                        "help": "The URI of the incoming HTTP request",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "info": {
+                "contact": {
+                    "email": "infra@storyscript.io",
+                    "name": "Storyscript",
+                    "url": "https://storyscript.io"
+                },
+                "description": "This is the HTTP service for Storyscript Cloud, which allows stories to be triggered via HTTP from the outside world.",
+                "license": {
+                    "name": "Apache 2",
+                    "url": "http://opensource.org/licenses/Apache-2.0"
+                },
+                "title": "HTTP gateway for Storyscript Cloud",
+                "version": "1.0.0"
+            },
+            "omg": 1
+        },
+        "readme": "# Storyscript HTTP Gateway\n\nAPI gateway server for executing Stories via HTTP.\n\n```coffee\nhttp server as server\n  when server listen method:\"post\" path:\"/\" as r\n    log info msg:(r.body to string)\n    log info msg:(r.headers to string)\n    log info msg:r.headers[\"Host\"]\n    r write content:\"Hello World\"\n    r setStatus code:200\n    r finish\n```\n\n```sh\n$ curl https://foobar.storyscriptapp.com/\nHello World\n```\n\n\n## Development\n\nSetup virtual environment and install dependencies\n```\nvirtualenv -p python3.6 venv\nsource venv/bin/activate\npip install -r requirements.txt\n```\n\nYou may need to tell pycurl the path to your openssl installation\n```\npip install --install-option=\"--with-openssl\" --install-option=\"--openssl-dir=/usr/local/opt/openssl\" pycurl\n```\nSee https://github.com/nahamsec/JSParser/issues/22\n\n\nRun locally by calling\n\n```\npython -m app.main --logging=debug --debug\n```\n\n### Register an endpoint\n\n```shell\ncurl --data '{\"endpoint\": \"http://localhost:9000/story/foo\", \"data\":{\"path\":\"/ping\", \"method\": \"post\", \"host\": \"a\"}}' \\\n     -H \"Content-Type: application/json\" \\\n     localhost:8889/register\n```\n\nNow access that endpoint\n\n```shell\ncurl -X POST -d 'foobar' -H \"Host: a.storyscriptapp.com\" http://localhost:8888/ping\n```\n\n### Unregister an endpoint\n\n```shell\ncurl --data '{\"endpoint\": \"http://localhost:9000/story/foo\", \"data\":{\"path\":\"/ping\", \"method\": \"post\", \"host\": \"a\"}}' \\\n     -H \"Content-Type: application/json\" \\\n     localhost:8889/unregister\n```\n",
+        "service": {
+            "alias": "http",
+            "description": "The Asyncy API gateway server for executing Stories via HTTP.",
+            "isCertified": true,
+            "name": "http",
+            "owner": {
+                "username": "storyscript"
+            },
+            "public": true,
+            "topics": [
+                "omg",
+                "storyscript",
+                "microservice"
+            ]
+        },
+        "serviceUuid": "18564840-7551-4bb7-9ba7-bb9c9e2d92b4",
+        "state": "BETA"
+    },
+    {
+        "configuration": {
+            "actions": {
+                "answer": {
+                    "arguments": {
+                        "question": {
+                            "help": "The question to ask; e.g. \"How far is Los Angeles from New York?\"",
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        },
+                        "units": {
+                            "enum": [
+                                "metric",
+                                "imperial"
+                            ],
+                            "help": "Use this parameter to manually select what system of units to use for measurements and quantities (either \"metric\" or \"imperial\").",
+                            "in": "requestBody",
+                            "required": false,
+                            "type": "enum"
+                        }
+                    },
+                    "help": "The Short Answers API returns a single plain text result directly from Wolfram|Alpha.",
+                    "http": {
+                        "contentType": "application/json",
+                        "method": "post",
+                        "path": "/shortanswer",
+                        "port": 8000
+                    },
+                    "output": {
+                        "contentType": "application/json",
+                        "properties": {
+                            "answer": {
+                                "help": "The response from the Wolfram API",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            },
+            "environment": {
+                "WOLFRAM_APP_ID": {
+                    "help": "Please create an app ID from https://products.wolframalpha.com/short-answers-api/documentation/",
+                    "required": true,
+                    "type": "string"
+                }
+            },
+            "info": {
+                "contact": {
+                    "email": "core@openmicroservices.org",
+                    "name": "Open Microservices",
+                    "url": "https://openmicroservices.org"
+                },
+                "description": "Access the Wolfram|Alpha API",
+                "title": "Wolfram",
+                "version": "1.0.0"
+            },
+            "lifecycle": {
+                "startup": {
+                    "command": [
+                        "python",
+                        "/app/app.py"
+                    ]
+                }
+            },
+            "oms": 1
+        },
+        "readme": "# _Wolfram_ Open Microservice\n\n> Access the Wolfram|Alpha API\n\n[![Open Microservice Specification Version](https://img.shields.io/badge/Open%20Microservice-1.0-477bf3.svg)](https://openmicroservices.org) [![Open Microservices Spectrum Chat](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/open-microservices) [![Open Microservices Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md) [![Open Microservices Commitzen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)\n\n## Introduction\n\nThis project is an example implementation of the [Open Microservice Specification](https://openmicroservices.org), a standard originally created at [Storyscript](https://storyscript.io) for building highly-portable \"microservices\" that expose the events, actions, and APIs inside containerized software.\n\n## Getting Started\n\nThe `oms` command-line interface allows you to interact with Open Microservices. If you're interested in creating an Open Microservice the CLI also helps validate, test, and debug your `oms.yml` implementation!\n\nSee the [oms-cli](https://github.com/microservices/oms) project to learn more!\n\n### Installation\n\n```\nnpm install -g @microservices/oms\n```\n\n## Usage\n\n### Open Microservices CLI Usage\n\nOnce you have the [oms-cli](https://github.com/microservices/oms) installed, you can run any of the following commands from within this project's root directory:\n\n#### Actions\n\n##### answer\n\n> The Short Answers API returns a single plain text result directly from Wolfram|Alpha.\n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| query | `string` | `true` | None | For instance, here is a query for \"How far is Los Angeles from New York?\" |\n| units | `enum` | `false` | None | Use this parameter to manually select what system of units to use for measurements and quantities (either \"metric\" or \"imperial\"). |\n| WOLFRAM_APP_ID | `string` | `true` | None | Please create an app ID from https://products.wolframalpha.com/short-answers-api/documentation/ |\n\n``` shell\noms run answer \\ \n    -a query='*****' \\ \n    -a units='*****' \\ \n    -e WOLFRAM_APP_ID=$WOLFRAM_APP_ID\n```\n\n## Contributing\n\nAll suggestions in how to improve the specification and this guide are very welcome. Feel free share your thoughts in the Issue tracker, or even better, fork the repository to implement your own ideas and submit a pull request.\n\n[![Edit wolfram on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oms-services/wolfram)\n\nThis project is guided by [Contributor Covenant](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md). Please read out full [Contribution Guidelines](https://github.com/oms-services/.github/blob/master/CONTRIBUTING.md).\n\n## Additional Resources\n\n* [Install the CLI](https://github.com/microservices/oms) - The OMS CLI helps developers create, test, validate, and build microservices.\n* [Example OMS Services](https://github.com/oms-services) - Examples of OMS-compliant services written in a variety of languages.\n* [Example Language Implementations](https://github.com/microservices) - Find tooling & language implementations in Node, Python, Scala, Java, Clojure.\n* [Storyscript Hub](https://hub.storyscript.io) - A public registry of OMS services.\n* [Community Chat](https://spectrum.chat/open-microservices) - Have ideas? Questions? Join us on Spectrum.\n",
+        "service": {
+            "alias": "wolfram",
+            "description": "Wolfram as a microservice",
+            "isCertified": false,
+            "name": "wolfram",
+            "owner": {
+                "username": "oms-services"
+            },
+            "public": true,
+            "topics": [
+                "microservice",
+                "wolfram-alpha",
+                "wolfram",
+                "oms",
+                "open-microservice"
+            ]
+        },
+        "serviceUuid": "89670e21-6c01-4afa-8f9f-d6753af15273",
+        "state": "BETA"
+    },
+    {
+        "configuration": {
+            "actions": {
+                "send": {
+                    "arguments": {
+                        "channel": {
+                            "help": "What channel to send message in.\nThis can be a \"#channel\" \"@user\" or a channel id.\n",
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        },
+                        "text": {
+                            "help": "Text of the message to send.",
+                            "in": "requestBody",
+                            "required": true,
+                            "type": "string"
+                        }
+                    },
+                    "help": "Sends a message to a channel.\nhttps://api.slack.com/methods/chat.postMessage\n",
+                    "http": {
+                        "contentType": "application/json",
+                        "method": "post",
+                        "path": "/api/chat.postMessage",
+                        "port": 8000
+                    },
+                    "output": {
+                        "contentType": "application/json",
+                        "type": "map"
+                    }
+                },
+                "bot": {
+                    "help": "Start a Slack bot",
+                    "events": {
+                        "hears": {
+                            "arguments": {
+                                "channel": {
+                                    "help": "Only listen in a specific channel",
+                                    "in": "requestBody",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                "pattern": {
+                                    "help": "A regexp pattern to filter messages",
+                                    "in": "requestBody",
+                                    "type": "string"
+                                }
+                            },
+                            "help": "Triggered anytime a messages matches the pattern",
+                            "http": {
+                                "port": 8000,
+                                "subscribe": {
+                                    "contentType": "application/json",
+                                    "method": "post",
+                                    "path": "/subscribe"
+                                },
+                                "unsubscribe": {
+                                    "contentType": "application/json",
+                                    "method": "post",
+                                    "path": "/unsubscribe"
+                                }
+                            },
+                            "output": {
+                                "contentType": "application/json",
+                                "actions": {
+                                    "reply": {
+                                        "arguments": {
+                                            "text": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "help": "Reply to the message.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    }
+                                },
+                                "properties": {
+                                    "channel": {
+                                        "help": "The channel ID",
+                                        "type": "string"
+                                    },
+                                    "client_msg_id": {
+                                        "help": "The message ID",
+                                        "type": "string"
+                                    },
+                                    "text": {
+                                        "help": "The message text",
+                                        "type": "string"
+                                    },
+                                    "ts": {
+                                        "help": "The message timestamp (eg: \"1535474523.000100\")",
+                                        "type": "string"
+                                    },
+                                    "user": {
+                                        "help": "The user ID",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "receives": {
+                            "arguments": {
+                                "pattern": {
+                                    "help": "A regexp pattern to filter messages",
+                                    "in": "requestBody",
+                                    "type": "string"
+                                }
+                            },
+                            "help": "Triggered by direct messages to the bot",
+                            "http": {
+                                "port": 8000,
+                                "subscribe": {
+                                    "contentType": "application/json",
+                                    "method": "post",
+                                    "path": "/subscribe"
+                                },
+                                "unsubscribe": {
+                                    "contentType": "application/json",
+                                    "method": "post",
+                                    "path": "/unsubscribe"
+                                }
+                            },
+                            "output": {
+                                "contentType": "application/json",
+                                "actions": {
+                                    "reply": {
+                                        "arguments": {
+                                            "text": {
+                                                "in": "responseBody",
+                                                "required": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "help": "Reply to the message.",
+                                        "http": {
+                                            "contentType": "application/json",
+                                            "use_event_conn": true
+                                        }
+                                    }
+                                },
+                                "properties": {
+                                    "channel": {
+                                        "help": "The channel ID",
+                                        "type": "string"
+                                    },
+                                    "client_msg_id": {
+                                        "help": "The message ID",
+                                        "type": "string"
+                                    },
+                                    "text": {
+                                        "help": "The message text",
+                                        "type": "string"
+                                    },
+                                    "ts": {
+                                        "help": "The message timestamp (eg: \"1535474523.000100\")",
+                                        "type": "string"
+                                    },
+                                    "user": {
+                                        "help": "The user ID",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "environment": {
+                "BOT_TOKEN": {
+                    "help": "The Slack bot token",
+                    "type": "string"
+                }
+            },
+            "health": {
+                "http": {
+                    "path": "/health",
+                    "port": 8000
+                }
+            },
+            "info": {
+                "contact": {
+                    "email": "core@openmicroservices.org",
+                    "name": "Open Microservices",
+                    "url": "https://openmicroservices.org"
+                },
+                "description": "Wrapper for the Slack API",
+                "title": "Slack",
+                "version": "0.2.0"
+            },
+            "lifecycle": {
+                "startup": {
+                    "command": [
+                        "python",
+                        "app/main.py"
+                    ]
+                }
+            },
+            "oms": 1
+        },
+        "readme": "# _Slack_ Open Microservice\n\n> Wrapper for the Slack API\n\n[![Open Microservice Specification Version](https://img.shields.io/badge/Open%20Microservice-1.0-477bf3.svg)](https://openmicroservices.org) [![Open Microservices Spectrum Chat](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/open-microservices) [![Open Microservices Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md) [![Open Microservices Commitzen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)\n\n## Introduction\n\nThis project is an example implementation of the [Open Microservice Specification](https://openmicroservices.org), a standard originally created at [Storyscript](https://storyscript.io) for building highly-portable \"microservices\" that expose the events, actions, and APIs inside containerized software.\n\n## Getting Started\n\nThe `oms` command-line interface allows you to interact with Open Microservices. If you're interested in creating an Open Microservice the CLI also helps validate, test, and debug your `oms.yml` implementation!\n\nSee the [oms-cli](https://github.com/microservices/oms) project to learn more!\n\n### Installation\n\n```\nnpm install -g @microservices/oms\n```\n\n## Usage\n\n### Open Microservices CLI Usage\n\nOnce you have the [oms-cli](https://github.com/microservices/oms) installed, you can run any of the following commands from within this project's root directory:\n\n#### Actions\n\n##### send\n\n> Sends a message to a channel.\nhttps://api.slack.com/methods/chat.postMessage\n\n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| text | `string` | `true` | None | Text of the message to send. |\n| channel | `string` | `true` | None | What channel to send message in. This can be a \"#channel\" \"@user\" or a channel id.  |\n| attachments | `list` | `false` | None | No description provided. |\n| token | `string` | `false` | None | Authentication token bearing required scopes. Environment variable BOT_TOKEN used by default.  |\n| BOT_TOKEN | `string` | `false` | None | The Slack bot token |\n\n``` shell\noms run send \\ \n    -a text='*****' \\ \n    -a channel='*****' \\ \n    -a attachments='*****' \\ \n    -a token='*****' \\ \n    -e BOT_TOKEN=$BOT_TOKEN\n```\n\n##### hears\n\n> Triggered anytime a messages matches the pattern\n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| pattern | `string` | `false` | None | A regexp pattern to filter messages |\n| channel | `string` | `true` | None | Only listen in a specific channel |\n| BOT_TOKEN | `string` | `false` | None | The Slack bot token |\n\n``` shell\noms subscribe hears \\ \n    -a pattern='*****' \\ \n    -a channel='*****' \\ \n    -e BOT_TOKEN=$BOT_TOKEN\n```\n,##### responds\n\n> Triggered by direct messages to the bot\n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| pattern | `string` | `false` | None | A regexp pattern to filter messages |\n| BOT_TOKEN | `string` | `false` | None | The Slack bot token |\n\n``` shell\noms subscribe responds \\ \n    -a pattern='*****' \\ \n    -e BOT_TOKEN=$BOT_TOKEN\n```\n\n##### users\n\n> \n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| token | `string` | `false` | None | Authentication token bearing required scopes. Environment variable BOT_TOKEN used by default.  |\n| include_locale | `boolean` | `false` | None | Set this to true to receive the locale for users. Defaults to false  |\n| limit | `int` | `false` | None | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.  |\n| cursor | `string` | `false` | None | Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first \"page\" of the collection. See pagination for more detail.  |\n| BOT_TOKEN | `string` | `false` | None | The Slack bot token |\n\n``` shell\noms run users \\ \n    -a token='*****' \\ \n    -a include_locale='*****' \\ \n    -a limit='*****' \\ \n    -a cursor='*****' \\ \n    -e BOT_TOKEN=$BOT_TOKEN\n```\n\n##### channels\n\n> Get a list of channels\n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| token | `string` | `false` | None | Authentication token bearing required scopes. Environment variable BOT_TOKEN used by default.  |\n| limit | `int` | `false` | None | Limit the number of channels to return. Must be less than 1000. |\n| exclude_archived | `boolean` | `false` | None | Set to true to exclude archived channels from the list |\n| types | `list` | `false` | None | Mix and match channel types: public_channel, private_channel, mpim, im Default is public_channel only.  |\n| BOT_TOKEN | `string` | `false` | None | The Slack bot token |\n\n``` shell\noms run channels \\ \n    -a token='*****' \\ \n    -a limit='*****' \\ \n    -a exclude_archived='*****' \\ \n    -a types='*****' \\ \n    -e BOT_TOKEN=$BOT_TOKEN\n```\n\n##### directChannels\n\n> Lists direct message channels for the calling user.\n##### Action Arguments\n\n| Argument Name | Type | Required | Default | Description |\n|:------------- |:---- |:-------- |:--------|:----------- |\n| token | `string` | `false` | None | Authentication token bearing required scopes. Environment variable BOT_TOKEN used by default.  |\n| limit | `int` | `false` | None | Limit the number of channels to return. Must be less than 1000. |\n| BOT_TOKEN | `string` | `false` | None | The Slack bot token |\n\n``` shell\noms run directChannels \\ \n    -a token='*****' \\ \n    -a limit='*****' \\ \n    -e BOT_TOKEN=$BOT_TOKEN\n```\n\n## Contributing\n\nAll suggestions in how to improve the specification and this guide are very welcome. Feel free share your thoughts in the Issue tracker, or even better, fork the repository to implement your own ideas and submit a pull request.\n\n[![Edit slack on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oms-services/slack)\n\nThis project is guided by [Contributor Covenant](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md). Please read out full [Contribution Guidelines](https://github.com/oms-services/.github/blob/master/CONTRIBUTING.md).\n\n## Additional Resources\n\n* [Install the CLI](https://github.com/microservices/oms) - The OMS CLI helps developers create, test, validate, and build microservices.\n* [Example OMS Services](https://github.com/oms-services) - Examples of OMS-compliant services written in a variety of languages.\n* [Example Language Implementations](https://github.com/microservices) - Find tooling & language implementations in Node, Python, Scala, Java, Clojure.\n* [Storyscript Hub](https://hub.storyscript.io) - A public registry of OMS services.\n* [Community Chat](https://spectrum.chat/open-microservices) - Have ideas? Questions? Join us on Spectrum.\n",
+        "service": {
+            "alias": "slack",
+            "description": "Slack bot microservice",
+            "isCertified": true,
+            "name": "slack",
+            "owner": {
+                "username": "oms-services"
+            },
+            "public": true,
+            "topics": [
+                "slack-bot",
+                "slack",
+                "microservice",
+                "oms"
+            ]
+        },
+        "serviceUuid": "f7f099d5-da2c-45eb-b56a-84d1f7756a42",
+        "state": "BETA"
+    }
+]

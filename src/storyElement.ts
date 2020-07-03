@@ -247,6 +247,7 @@ export default class StoryElement {
             this.getIndexName(),
             {
                 'name': this.name,
+                'depth': this.depth,
                 'parent': this.parent ? this.parent.uuid : null
             },
             this.generateUUID()

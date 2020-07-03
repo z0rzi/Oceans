@@ -1,0 +1,100 @@
+{
+    "slack": {
+        "vocabulary": [
+            "Execute actions on slack for a team",
+            "Notify people and hear what they say. Have a conversation with others.",
+            "The slack service performs actions on a slack organisation, such as sending, repsonding or reacting to messages",
+            "The slack service provides the ability to interact with the Slack communication platform. Using the Storyscript Slack app, stories can listen to and send messages."
+        ],
+        "methods": {
+            "send": [
+                "The send method allows stories to send text-only slack messages to a particular channel.",
+                "Sends a direct message to a user",
+                "send a message to a conversation",
+                "Notify someone"
+            ],
+            "hears": [
+                "The hears event allows stories to listen for messages in a particular channel that match a regular expression pattern. Stories will not listen for messages from their own Slack Bot.",
+                "Fires an event when a message appear on the channel asked, matching a provided pattern or not",
+                "await for an incoming message on a conversation with a specific pattern",
+                "Respond to messages in a channel"
+            ],
+            "receives": [
+                "The hears event allows stories to listen for Slack Bot mentions that match a regular expression regex pattern. Stories will not listen for messages from their own Slack Bot.",
+                "Fires an event when the bot receives a direct message or is mentionned (I think)",
+                "await for any incoming direct message with a specific pattern",
+                "Respond to direct messages"
+            ]
+        }
+    },
+    "log": {
+        "vocabulary": [
+            "The Log service allows for debug logging inside the runtime. It should absolutely not be exposed as a public service.",
+            "Logs information about a story",
+            "log any message of your app",
+            "print message"
+        ],
+        "methods": {
+            "debug": [
+                "Logs a message of level DEBUG",
+                "log a debug message",
+                "print message"
+            ],
+            "error": [
+                "Logs a message of level ERROR",
+                "write an error message",
+                "print message"
+            ],
+            "info": [
+                "logs a message of level info",
+                "prints an information",
+                "print message"
+            ],
+            "warn": [
+                "Logs a message of level WARN",
+                "write a warning message in the logs",
+                "print message"
+            ]
+        }
+    },
+    "http": {
+        "vocabulary": [
+            "The HTTP service allows for stories to listen for http requests.",
+            "A simple HTTP service used to perform HTTP specific actions, such as fetching or serving files",
+            "handle http requests in and out",
+            "Interact with the world wide web!"
+        ],
+        "methods": {
+            "fetch": [
+                "This doesn't exist. If it were to exist I would say... The http fetch method allows for stories to send http requests.",
+                "Performs a single request to the provided URL with the some information. Useful to make simple HTTP requests",
+                "query any URL in the world wide web",
+                "Download a webpage or file from the web"
+            ],
+            "listen": [
+                "The http listen event allows for stories to receive http GET requests.",
+                "Hosts a website on a specific address and port",
+                "Fires events when someone load a specific route",
+                "await for a request on a specific route of your application",
+                "Serve content on the web"
+            ]
+        }
+    },
+    "wolfram": {
+        "vocabulary": [
+            "The wolfram service allows for stories to send questions to Wolfram's intelligent query system and receive answers.",
+            "Wolfram is a know-it-all and can answer a lot of questions",
+            "answer simple questions requesting the wolfram api",
+            "Answers math questions",
+            "equation mathematics"
+        ],
+        "methods": {
+            "answer": [
+                "The wolfram answer method allows for stories to send questions to Wolfram's intelligent query system and receive answers.",
+                "Gives a small answer to the question asked",
+                "ask anything and get an answer from wolfram",
+                "Answer my math question"
+            ]
+        }
+    }
+}

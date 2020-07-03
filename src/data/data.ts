@@ -11,7 +11,10 @@ const filesPaths = {
     'contextRules': 'context.sp.json',
     'lemmatiserExtension': 'lemmatiserExtension.sp.json',
     'stopWords': 'stopWords.json',
-    'idiomsReplacements': 'idiomsReplacements.sp.json'
+    'idiomsReplacements': 'idiomsReplacements.sp.json',
+
+    'servicesBlob': 'generator/servicesBlob.json',
+    'vocabulary': 'generator/vocabulary.json'
 }
 
 export function getData(fileId: string): any {

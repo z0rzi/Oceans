@@ -4,7 +4,7 @@ module.exports = {
         host: 'localhost',
         indexes: {
             'Words':          'dictionnary',
-            'StoryElements':  'storyElements',
+            'StoryElements':  'story-elements',
         }
     }
 }

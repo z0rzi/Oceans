@@ -5,6 +5,7 @@ import path  from 'path'
 import ElasticWrapper  from './elasticWrapper'
 import StoryElement    from './storyElement'
 import Word            from './word'
+import * as Data       from './data/data'
 import * as Processor  from './processor'
 
 function parseBlob(blob)
@@ -95,8 +96,7 @@ getServicesBlob()
 
         let vocab:any = {}
         try {
-            vocab = fs.readFileSync(path.join(__dirname, '../data/vocabulary.json'))
-            vocab = JSON.parse(vocab)
+            vocab = Data.getData('vocabulary')
         } catch (err) {
             console.error('Couldn\'t read the vocabulary file....')
         }
@@ -157,7 +157,10 @@ getServicesBlob()
 function getServicesBlob() {
     return new Promise((resolve, reject) => {
 
-        fs.readFile('data/blob.json', {}, (err, rawData) => {
+        const services = Data.getData('servicesBlob')
+        resolve(services)
+        return
+        fs.readFile('data/generator/servicesBlob.json', {}, (err, rawData) => {
             try {
                 const parsedData = JSON.parse(rawData as any)
                 resolve(parsedData)
