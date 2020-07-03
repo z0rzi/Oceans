@@ -101,14 +101,28 @@ export default class Word {
             }
         })
 
-        const out = res.body.hits.hits
+        const hits = res.body.hits.hits
+        const out = []
 
-        return out.map(({_source, _id, _score}) => {
+        for (const {_source, _id, _score} of hits) {
+            if (!_score) continue
+
             const w = new Word(_source.name)
+
+            const usages = []
+            for (const {elem, weight} of _source.usages) {
+                usages.push({
+                    elem: await StoryElement.fromUUID(elem),
+                    weight: weight
+                })
+            }
+            w.usages = usages
             w.uuid = _id
 
-            return {score: _score, word: w}
-        })
+            out.push({score: _score, word: w})
+        }
+
+        return out
     }
 
     /**

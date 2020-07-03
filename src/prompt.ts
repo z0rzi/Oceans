@@ -21,7 +21,10 @@ async function newSentence() {
 
     const oceans = Processor.createOceans(res.sentence)
     oceans.forEach(ocean => {
-        ocean.reduce()
+        ocean.fetchVocabulary()
+            .then(() => {
+                console.log(ocean.vocabulary)
+            })
     })
 
     console.log(oceans)

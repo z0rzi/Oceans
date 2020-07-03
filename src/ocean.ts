@@ -12,7 +12,7 @@ export default class Ocean {
     raw: string
     reducedTimes: number
 
-    vocabulary: Word[]
+    vocabulary: {score: number, word: Word}[]
 
     usedElements: StoryElement[]
 
@@ -23,7 +23,15 @@ export default class Ocean {
         this.type = type
     }
 
-    reduce(elems?: StoryElement[]): [StoryElement, Word[]][] {
+    async reduce(elems?: StoryElement[]): Promise<[StoryElement, Word[]][]> {
+        if (!this.vocabulary.length) {
+            await this.fetchVocabulary()
+        }
+
+        if (!this.vocabulary.length) {
+            return []
+        }
+
         this.reducedTimes++
         return []
     }
@@ -34,6 +42,7 @@ export default class Ocean {
      * TODO Keep unknown words somewhere!
      */
     async fetchVocabulary() {
+        this.vocabulary = await Word.fromSentence(this.raw)
     }
 
     /**
